@@ -12623,7 +12623,6 @@ if NebulaUI.Config.Debug.Enabled then
 end
 
 -- Return the library
-return NebulaUI
 
 
 
@@ -13902,7 +13901,6 @@ if NebulaUI.Config.Debug.Enabled then
 end
 
 -- Return the complete library
-return NebulaUI
 
 
 
