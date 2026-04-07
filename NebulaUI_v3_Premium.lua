@@ -6167,32 +6167,47 @@ function NebulaUI:CreateWindow(Config)
             Page.CanvasSize = UDim2.new(0, 0, 0, PageLayout.AbsoluteContentSize.Y + 24)
         end)
         
-        -- Tab selection
+                -- Tab selection
         local function SelectTab()
             if Window.CurrentTab == Tab then return end
             
-            -- Deselect previous
+            -- // 1. DESELECT PREVIOUS (PENGAMAN TOTAL)
             if Window.CurrentTab then
                 local Prev = Window.CurrentTab
-                Animations.Tween(Prev.Button.Indicator, {Size = UDim2.new(0, 4, 0, 0)}, 0.2)
-                Animations.Tween(Prev.Button.Indicator, {Position = UDim2.new(0, 0, 0.5, 0)}, 0.2)
-                Animations.Tween(Prev.Button, {BackgroundTransparency = 1}, 0.2)
-                Animations.Tween(Prev.Button.Icon, {TextColor3 = Theme.TextSecondary}, 0.2)
-                Animations.Tween(Prev.Button.Text, {TextColor3 = Theme.TextSecondary}, 0.2)
-                
-                Prev.Page.Visible = false
+                if Prev.Button then
+                    if Prev.Button:FindFirstChild("Indicator") then
+                        Animations.Tween(Prev.Button.Indicator, {Size = UDim2.new(0, 4, 0, 0)}, 0.2)
+                        Animations.Tween(Prev.Button.Indicator, {Position = UDim2.new(0, 0, 0.5, 0)}, 0.2)
+                    end
+                    Animations.Tween(Prev.Button, {BackgroundTransparency = 1}, 0.2)
+                    if Prev.Button:FindFirstChild("Icon") then
+                        Animations.Tween(Prev.Button.Icon, {TextColor3 = Theme.TextSecondary}, 0.2)
+                    end
+                    if Prev.Button:FindFirstChild("Text") then
+                        Animations.Tween(Prev.Button.Text, {TextColor3 = Theme.TextSecondary}, 0.2)
+                    end
+                end
+                if Prev.Page then Prev.Page.Visible = false end
             end
             
-            -- Select new
+            -- // 2. SELECT NEW (PENGAMAN JUGA)
             Window.CurrentTab = Tab
-            Page.Visible = true
+            if Page then Page.Visible = true end
             
-            Animations.Spring(Indicator, {Size = UDim2.new(0, 4, 0, 28)}, 0.35)
-            Animations.Tween(Indicator, {Position = UDim2.new(0, 0, 0.5, -14)}, 0.35)
-            Animations.Tween(TabButton, {BackgroundTransparency = 0.65}, 0.2)
-            Animations.Tween(IconLabel, {TextColor3 = Theme.Accent}, 0.2)
-            Animations.Tween(TextLabel, {TextColor3 = Theme.TextPrimary}, 0.2)
-        end
+            if Indicator then
+                Animations.Spring(Indicator, {Size = UDim2.new(0, 4, 0, 28)}, 0.35)
+                Animations.Tween(Indicator, {Position = UDim2.new(0, 0, 0.5, -14)}, 0.35)
+            end
+            if TabButton then
+                Animations.Tween(TabButton, {BackgroundTransparency = 0.65}, 0.2)
+            end
+            if IconLabel then
+                Animations.Tween(IconLabel, {TextColor3 = Theme.Accent}, 0.2)
+            end
+            if TextLabel then
+                Animations.Tween(TextLabel, {TextColor3 = Theme.TextPrimary}, 0.2)
+            end
+        end -- Tutup fungsi SelectTab cuma satu kali di sini
         
         TabButton.MouseButton1Click:Connect(function()
             local MousePos = UserInputService:GetMouseLocation()
