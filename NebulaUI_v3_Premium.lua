@@ -320,8 +320,7 @@ function Utilities.GetScreenSize()
     return workspace.CurrentCamera and workspace.CurrentCamera.ViewportSize or Vector2.new(1920, 1080)
 end
 
--- Calculate DPI sca
-                le
+-- Calculate DPI scale
 function Utilities.GetDPIScale()
     local ScreenSize = Utilities.GetScreenSize()
     local BaseResolution = Vector2.new(1920, 1080)
