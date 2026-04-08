@@ -320,7 +320,8 @@ function Utilities.GetScreenSize()
     return workspace.CurrentCamera and workspace.CurrentCamera.ViewportSize or Vector2.new(1920, 1080)
 end
 
--- Calculate DPI scale
+-- Calculate DPI sca
+                le
 function Utilities.GetDPIScale()
     local ScreenSize = Utilities.GetScreenSize()
     local BaseResolution = Vector2.new(1920, 1080)
@@ -364,15 +365,14 @@ Animations.EasingDirections = {
     InOut = Enum.EasingDirection.InOut
 }
 
--- Create and play tween with tracking
+-- [[ FUNGSI TWEEN DENGAN PENGAMAN BOSS RELSZZ43 ]]
 function Animations.Tween(Object, Properties, Duration, EasingStyle, EasingDirection, Delay)
-    -- [[ PENGAMAN UTAMA BOSS RELSZZ43 ]]
     if not Object or typeof(Object) ~= "Instance" or not Properties then
         return nil
     end
     
-    -- Check tween limit
     if Animations.TweenCount >= NebulaUI.Config.Animation.MaxConcurrentTweens then
+        if NebulaUI.Config.Debug.Enabled then
             warn("[NebulaUI] Max concurrent tweens reached, skipping tween")
         end
         return nil
@@ -386,7 +386,6 @@ function Animations.Tween(Object, Properties, Duration, EasingStyle, EasingDirec
     local TweenInfo = TweenInfo.new(Duration, EasingStyle, EasingDirection, 0, false, Delay)
     local Tween = TweenService:Create(Object, TweenInfo, Properties)
     
-    -- Track tween
     local TweenID = Utilities.GenerateID()
     Animations.ActiveTweens[TweenID] = Tween
     Animations.TweenCount = Animations.TweenCount + 1
@@ -398,7 +397,8 @@ function Animations.Tween(Object, Properties, Duration, EasingStyle, EasingDirec
     
     Tween:Play()
     return Tween
-end
+                end
+
 
 -- Spring animation using custom physics
 function Animations.Spring(Object, Properties, Duration)
