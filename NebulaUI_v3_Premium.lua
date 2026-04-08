@@ -366,13 +366,13 @@ Animations.EasingDirections = {
 
 -- Create and play tween with tracking
 function Animations.Tween(Object, Properties, Duration, EasingStyle, EasingDirection, Delay)
-    if not Object or not Properties then
+    -- [[ PENGAMAN UTAMA BOSS RELSZZ43 ]]
+    if not Object or typeof(Object) ~= "Instance" or not Properties then
         return nil
     end
     
     -- Check tween limit
     if Animations.TweenCount >= NebulaUI.Config.Animation.MaxConcurrentTweens then
-        if NebulaUI.Config.Debug.Enabled then
             warn("[NebulaUI] Max concurrent tweens reached, skipping tween")
         end
         return nil
