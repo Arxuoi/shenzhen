@@ -506,9 +506,9 @@ function Nexuralib:CreateWindow(cfg)
     local vp   = workspace.CurrentCamera.ViewportSize
     local defW = math.min(cfg.Size and cfg.Size.X or 670, vp.X - 60)
     local defH = math.min(cfg.Size and cfg.Size.Y or 450, vp.Y - 60)
-    local defX = cfg.Position and cfg.Position.X or math.floor((vp.X-defW)/2)
-    local defY = cfg.Position and cfg.Position.Y or math.floor((vp.Y-defH)/2)
-
+    local defX = cfg.Position and cfg.Position.X or math.max(0, (vp.X - defW) / 2)
+    local defY = cfg.Position and cfg.Position.Y or math.max(0, (vp.Y - defH) / 2)
+    
     -- ScreenGui — IgnoreGuiInset=true agar koordinat konsisten dengan GetMouseLocation
     local sg = Instance.new("ScreenGui")
     sg.Name="NexuralibUI"; sg.ResetOnSpawn=false
