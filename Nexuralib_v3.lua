@@ -658,7 +658,8 @@ function Nexuralib:CreateWindow(cfg)
     padding(ContentScroll, S.MD, S.MD, S.MD, S.MD)
 
     -- ===== TABS =====
-    local tabs={}, activeTab=nil
+    local tabs={}
+    activeTab=nil
 
     local function setActive(name)
         for n,td in pairs(tabs) do
